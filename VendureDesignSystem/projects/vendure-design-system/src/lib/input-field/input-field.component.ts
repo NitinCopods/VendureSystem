@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +11,7 @@ import { composeClasses } from '../utils/classes-util';
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatIconModule],
   templateUrl: './input-field.component.html',
-  styleUrl: './input-field.component.scss'
+  styleUrl: './input-field.component.scss',
 })
 export class InputFieldComponent {
   @Input() defaultValue?: string = '';
@@ -26,6 +26,13 @@ export class InputFieldComponent {
   @Input() placeholder?: string = '';
   @Input() hint?: string = '';
   @Input() endAdornment?: string = '';
+
+  constructor(private cdr: ChangeDetectorRef) { }
+
+  ngOnInit() {
+    // Force change detection after initialization
+    this.cdr.detectChanges();
+  }
 
   // Function to build all the classes based on prop for component
   getUtilityClasses() {

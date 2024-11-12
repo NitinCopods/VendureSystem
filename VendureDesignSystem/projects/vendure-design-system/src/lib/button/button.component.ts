@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { composeClasses } from '../utils/classes-util';
@@ -11,7 +11,6 @@ import { capitalize } from '../utils/capitalize';
   imports: [NgClass, MatButtonModule, MatIconModule],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
-  encapsulation: ViewEncapsulation.None
 })
 export class ButtonComponent {
   // Inputs for button configuration
@@ -29,7 +28,12 @@ export class ButtonComponent {
   // Output event when the button is clicked
   @Output() onClick = new EventEmitter<void>();
 
-  // constructor(private themeService: ThemeService) { }
+  constructor(private cdr: ChangeDetectorRef) { }
+
+  ngOnInit() {
+    // Force change detection after initialization
+    this.cdr.detectChanges();
+  }
 
   handleClick() {
     if (!this.disabled) {
@@ -39,6 +43,7 @@ export class ButtonComponent {
 
   // Function to build all the classes based on prop for component
   getUtilityClasses() {
+    console.log(this.label)
     const states = [
       capitalize(this.variant),
       `Size${capitalize(this.size)}`,
@@ -51,4 +56,5 @@ export class ButtonComponent {
     const classes = composeClasses(states, "btn", this.className);
     return classes;
   }
+
 }

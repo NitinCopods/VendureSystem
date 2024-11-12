@@ -31,6 +31,16 @@
                 "defaultValue": "{\n  large: {\n    name: \"Large Screen\",\n    styles: {\n      width: \"1920px\",\n      height: \"1080px\"\n    }\n  },\n  small: {\n    name: \"Small Screen\",\n    styles: {\n      width: \"800px\",\n      height: \"963px\"\n    }\n  }\n}"
             },
             {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/vendure-design-system/src/lib/alert/alert.stories.tsx",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    title:\n      \"LMN template for this payer and speciality is available, download the template and re-upload the signed letter\",\n  },\n}"
+            },
+            {
                 "name": "DefaultSize",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -91,6 +101,16 @@
                 "defaultValue": "{\n  args: {\n    focused: true,\n  },\n}"
             },
             {
+                "name": "globalTypes",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/vendure-design-system/.storybook/preview.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  theme: {\n    name: \"Theme\",\n    description: \"Global theme for components\",\n    defaultValue: \"light\",\n    toolbar: {\n      icon: \"circlehollow\",\n      items: [\n        { value: \"LIGHT\", icon: \"circlehollow\", title: \"Light Theme\" },\n        { value: \"DARK\", icon: \"circle\", title: \"Dark Theme\" },\n      ],\n      showName: true,\n    },\n  },\n}"
+            },
+            {
                 "name": "IconButton",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -109,6 +129,16 @@
                 "deprecationMessage": "",
                 "type": "Meta<VendureDesignSystemComponent>",
                 "defaultValue": "{\n  title: 'Example/BTSS',\n  component: VendureDesignSystemComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args\n  args: { onClick: fn() },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/vendure-design-system/src/lib/alert/alert.stories.tsx",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<AlertComponent>",
+                "defaultValue": "{\n  title: \"Components/Alert\",\n  component: AlertComponent,\n  tags: [\"autodocs\"],\n  argTypes: {\n    title: {\n      control: {\n        type: \"text\",\n      },\n    },\n    action: {\n      control: {\n        type: \"text\",\n      },\n    },\n  },\n}"
             },
             {
                 "name": "meta",
@@ -158,7 +188,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Preview",
-                "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n    theme: {\n      name: \"Theme\",\n      description: \"Global theme for components\",\n      defaultValue: \"light\",\n      toolbar: {\n        icon: \"circlehollow\",\n        items: [\n          { value: \"LIGHT\", icon: \"circlehollow\", title: \"Light Theme\" },\n          { value: \"DARK\", icon: \"circle\", title: \"Dark Theme\" },\n        ],\n        showName: true,\n      },\n    },\n    layout: \"centered\",\n    viewport: { viewports: customViewports },\n  },\n  decorators: [\n    moduleMetadata({\n      declarations: [],\n    }),\n    (storyFn: any, context: any) => {\n      const { template, ...story } = storyFn();\n      console.log(context)\n      const themeService = new ThemeService();\n      themeService.setTheme(themes.light);\n      return {\n        ...story,\n        template: `\n          <theme-wrapper>\n            ${template}\n          </theme-wrapper>\n        `\n      };\n    }\n  ]\n}"
+                "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n\n    layout: \"centered\",\n    viewport: { viewports: customViewports },\n  },\n  decorators: [\n    moduleMetadata({\n      declarations: [],\n    }),\n    (storyFn: any, context: any) => {\n      const { template, ...story } = storyFn();\n      const themeService = new ThemeService();\n      themeService.setTheme(context?.userGlobals?.theme === 'LIGHT' ? themes.light : themes.dark);\n      return {\n        ...story,\n        template: template\n      };\n    }\n  ]\n}"
             },
             {
                 "name": "Primary",
@@ -198,7 +228,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "any",
-                "defaultValue": "{\n  light: {\n    name: \"light\",\n    colors: {\n      primary: 'red',\n    }\n  },\n  dark: {\n    name: \"light\",\n    colors: {\n      primary: 'yellow',\n    }\n  },\n}"
+                "defaultValue": "{\n  light: {\n    primary: '#125AC0',\n  },\n  dark: {\n    primary: '#1e72e9',\n  },\n}"
+            },
+            {
+                "name": "WithEndAdornment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/vendure-design-system/src/lib/input-field/input-field.stories.tsx",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    error: true,\n    focused: true,\n    endAdornment: \"info\",\n  },\n}"
             },
             {
                 "name": "WithEndIcon",
@@ -279,6 +319,17 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<VendureDesignSystemComponent>",
                 "file": "projects/vendure-design-system/src/lib/VendureDesign.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<AlertComponent>",
+                "file": "projects/vendure-design-system/src/lib/alert/alert.stories.tsx",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -433,6 +484,16 @@
                     "defaultValue": "{\n  large: {\n    name: \"Large Screen\",\n    styles: {\n      width: \"1920px\",\n      height: \"1080px\"\n    }\n  },\n  small: {\n    name: \"Small Screen\",\n    styles: {\n      width: \"800px\",\n      height: \"963px\"\n    }\n  }\n}"
                 },
                 {
+                    "name": "globalTypes",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/vendure-design-system/.storybook/preview.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  theme: {\n    name: \"Theme\",\n    description: \"Global theme for components\",\n    defaultValue: \"light\",\n    toolbar: {\n      icon: \"circlehollow\",\n      items: [\n        { value: \"LIGHT\", icon: \"circlehollow\", title: \"Light Theme\" },\n        { value: \"DARK\", icon: \"circle\", title: \"Dark Theme\" },\n      ],\n      showName: true,\n    },\n  },\n}"
+                },
+                {
                     "name": "preview",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
@@ -440,7 +501,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Preview",
-                    "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n    theme: {\n      name: \"Theme\",\n      description: \"Global theme for components\",\n      defaultValue: \"light\",\n      toolbar: {\n        icon: \"circlehollow\",\n        items: [\n          { value: \"LIGHT\", icon: \"circlehollow\", title: \"Light Theme\" },\n          { value: \"DARK\", icon: \"circle\", title: \"Dark Theme\" },\n        ],\n        showName: true,\n      },\n    },\n    layout: \"centered\",\n    viewport: { viewports: customViewports },\n  },\n  decorators: [\n    moduleMetadata({\n      declarations: [],\n    }),\n    (storyFn: any, context: any) => {\n      const { template, ...story } = storyFn();\n      console.log(context)\n      const themeService = new ThemeService();\n      themeService.setTheme(themes.light);\n      return {\n        ...story,\n        template: `\n          <theme-wrapper>\n            ${template}\n          </theme-wrapper>\n        `\n      };\n    }\n  ]\n}"
+                    "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n\n    layout: \"centered\",\n    viewport: { viewports: customViewports },\n  },\n  decorators: [\n    moduleMetadata({\n      declarations: [],\n    }),\n    (storyFn: any, context: any) => {\n      const { template, ...story } = storyFn();\n      const themeService = new ThemeService();\n      themeService.setTheme(context?.userGlobals?.theme === 'LIGHT' ? themes.light : themes.dark);\n      return {\n        ...story,\n        template: template\n      };\n    }\n  ]\n}"
                 },
                 {
                     "name": "themes",
@@ -450,7 +511,29 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "any",
-                    "defaultValue": "{\n  light: {\n    name: \"light\",\n    colors: {\n      primary: 'red',\n    }\n  },\n  dark: {\n    name: \"light\",\n    colors: {\n      primary: 'yellow',\n    }\n  },\n}"
+                    "defaultValue": "{\n  light: {\n    primary: '#125AC0',\n  },\n  dark: {\n    primary: '#1e72e9',\n  },\n}"
+                }
+            ],
+            "projects/vendure-design-system/src/lib/alert/alert.stories.tsx": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/vendure-design-system/src/lib/alert/alert.stories.tsx",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    title:\n      \"LMN template for this payer and speciality is available, download the template and re-upload the signed letter\",\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/vendure-design-system/src/lib/alert/alert.stories.tsx",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<AlertComponent>",
+                    "defaultValue": "{\n  title: \"Components/Alert\",\n  component: AlertComponent,\n  tags: [\"autodocs\"],\n  argTypes: {\n    title: {\n      control: {\n        type: \"text\",\n      },\n    },\n    action: {\n      control: {\n        type: \"text\",\n      },\n    },\n  },\n}"
                 }
             ],
             "projects/vendure-design-system/src/lib/input-field/input-field.stories.tsx": [
@@ -503,6 +586,16 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\n  args: {\n    placeholder: \"olivia@verdure.com\",\n  },\n}"
+                },
+                {
+                    "name": "WithEndAdornment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/vendure-design-system/src/lib/input-field/input-field.stories.tsx",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    error: true,\n    focused: true,\n    endAdornment: \"info\",\n  },\n}"
                 },
                 {
                     "name": "WithError",
@@ -588,6 +681,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<VendureDesignSystemComponent>",
                     "file": "projects/vendure-design-system/src/lib/VendureDesign.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "projects/vendure-design-system/src/lib/alert/alert.stories.tsx": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<AlertComponent>",
+                    "file": "projects/vendure-design-system/src/lib/alert/alert.stories.tsx",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",

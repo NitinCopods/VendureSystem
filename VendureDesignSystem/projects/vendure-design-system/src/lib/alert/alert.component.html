@@ -1,0 +1,16 @@
+<div [class]="getUtilityClasses()">
+  <mat-icon class="alert-icon">{{ getAlertIcon() }}</mat-icon>
+  <mat-dialog-content class="alert-body">
+    <div class="alert-header">
+      <div class="alert-title-text">{{ title }}</div>
+      @if(dismissible){
+      <mat-dialog-actions class="alert-actions">
+        <mat-icon mat-dialog-close class="alert-close">close</mat-icon>
+      </mat-dialog-actions>
+      }
+    </div>
+    <div class="alert-content">
+      <ng-content></ng-content>
+    </div>
+  </mat-dialog-content>
+</div>

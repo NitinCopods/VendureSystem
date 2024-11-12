@@ -1,9 +1,9 @@
-<div>
+<div class="app">
   <div>
     <p>Button Component</p>
     <lib-button
       label="New"
-      [className]="'custom-button'"
+      className="custom-button"
       startIcon="home"
     ></lib-button>
   </div>
@@ -11,7 +11,11 @@
     <p>Input Field Component</p>
     <lib-input-field
       defaultValue="Input"
-      [className]="'custom-input-field'"
+      className="custom-input-field"
     ></lib-input-field>
+  </div>
+  <div>
+    <p>Alert Component</p>
+    <lib-button label="Open Alert" (click)="openDialog()"> </lib-button>
   </div>
 </div>

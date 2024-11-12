@@ -1,0 +1,78 @@
+.alert {
+  display: flex;
+  align-items: start;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-family: Roboto, sans-serif;
+
+  &-title-text {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  &-body {
+    display: grid;
+    row-gap: 4px;
+    color: #4c4640;
+    font-size: 12px;
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  &-icon {
+    height: 16px;
+    width: 16px;
+    font-size: 16px;
+  }
+
+  &-close {
+    height: 16px;
+    width: 16px;
+    font-size: 16px;
+    color: #6e645d;
+    cursor: pointer;
+  }
+
+  &-actions {
+    display: flex;
+    align-items: center;
+  }
+
+  &-Info {
+    background-color: #ebf3ff;
+    & .alert-title-text,
+    & .alert-icon {
+      color: #0e4ba0;
+    }
+  }
+
+  &-Success {
+    background-color: #d8ebd2;
+    & .alert-title-text,
+    & .alert-icon {
+      color: #45852e;
+    }
+  }
+
+  &-Warning {
+    background-color: #fcf5e9;
+    & .alert-title-text,
+    & .alert-icon {
+      color: #c38814;
+    }
+  }
+
+  &-Error {
+    background-color: #fbf4f4;
+    & .alert-title-text,
+    & .alert-icon {
+      color: #b73838;
+    }
+  }
+}
