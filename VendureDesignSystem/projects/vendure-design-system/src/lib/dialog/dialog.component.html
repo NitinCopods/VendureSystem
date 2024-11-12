@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content>
+  <p>{{ data.message }}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <lib-button label="Cancel" variant="text" (click)="onCancel()">
+    {{ data.cancelText || "Cancel" }}
+  </lib-button>
+  <lib-button label="Confirm" (click)="onConfirm()">
+    {{ data.confirmText || "Confirm" }}
+  </lib-button>
+</mat-dialog-actions>

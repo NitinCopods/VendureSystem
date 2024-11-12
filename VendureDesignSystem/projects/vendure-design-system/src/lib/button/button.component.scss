@@ -1,11 +1,10 @@
+:host ::ng-deep .btn,
 .mdc-button,
 .mdc-fab {
   // default btn styles
-  &.btn {
-    height: 40px;
-    border-radius: 8px;
-    padding: 10px 16px;
-  }
+  height: 40px;
+  border-radius: 8px;
+  padding: 10px 16px;
 
   // variant='filled' btn styles
   &.btn-Filled {
