@@ -1,53 +1,55 @@
-import { Meta, moduleMetadata, StoryFn } from "@storybook/angular";
-import { DialogComponent } from "./dialog.component";
-import { MatDialogModule } from "@angular/material/dialog";
+import { Meta, moduleMetadata, StoryFn, StoryObj } from "@storybook/angular";
+import { DialogComponent, DialogData } from "./dialog.component";
 import { ButtonComponent } from "../button/button.component";
 import { DialogService } from "./dialog.service";
 import { action } from '@storybook/addon-actions';
-import { Component, Input } from "@angular/core";
+import { Component, Input, Type } from "@angular/core";
+import { InputFieldComponent } from "../input-field/input-field.component";
 
-interface DialogConfig {
-    title: string;
-    message: string;
-    confirmText: string;
-    cancelText: string;
-}
 
 // Create a host component with proper input typing
 @Component({
     selector: 'app-dialog-host',
     template: `
       <div style="padding: 20px;">
-        <lib-button  (click)="openDialog()">
-          Open Dialog
-        </lib-button>
+        <lib-button label="Open Dialog" (click)="openDialog()"></lib-button>
       </div>
     `
 })
 
 class DialogHostComponent {
-    @Input() config!: DialogConfig;
+    @Input() title: string = '';
+    @Input() message: string = '';
+    @Input() confirmText?: string;
+    @Input() cancelText?: string;
 
     constructor(private dialogService: DialogService) { }
 
     openDialog() {
-        this.dialogService.openDialog(this.config).subscribe(result => {
+        const config = {
+            title: this.title,
+            message: this.message,
+            confirmText: this.confirmText,
+            cancelText: this.cancelText,
+            component: InputFieldComponent,
+        }
+        this.dialogService.openDialog(config).subscribe(result => {
             action('Dialog Result')(result);
         });
     }
 }
 
 
-export default {
+const meta: Meta<DialogHostComponent> = {
     title: "Components/Dialog",
     component: DialogHostComponent,
     decorators: [
         moduleMetadata({
             imports: [
-                MatDialogModule,
-                ButtonComponent
+                DialogComponent,
+                ButtonComponent,
+                InputFieldComponent
             ],
-            providers: [DialogService],
         })
     ],
     parameters: {
@@ -78,61 +80,18 @@ export default {
             description: 'Text for the confirm button',
             defaultValue: 'Confirm'
         },
-        cancelText: {
-            control: 'text',
-            description: 'Text for the cancel button',
-            defaultValue: 'Cancel'
-        }
+
     }
-} as Meta;
+};
 
-// const DialogDemoComponent = {
-//     template: `
-//       <button mat-raised-button color="primary" (click)="openDialog()">
-//         Open Dialog
-//       </button>
-//     `,
-//     props: {
-//         dialogService: undefined,
-//         dialogConfig: undefined,
-//         onResult: undefined
-//     }
-// };
+export default meta;
+type Story = StoryObj<DialogData<unknown>>;
 
-// const Template: StoryFn = (args) => ({
-//     ...DialogDemoComponent,
-//     props: {
-//         dialogService: {
-//             openDialog: (config: any) => {
-//                 action('Dialog Opened')(config);
-//                 return {
-//                     afterClosed: () => ({
-//                         subscribe: (fn: (result: boolean) => void) => {
-//                             action('Dialog Closed')(true);
-//                             fn(true);
-//                         }
-//                     })
-//                 };
-//             }
-//         },
-//         dialogConfig: args,
-//         openDialog: function () {
-//             this['dialogService'].openDialog(this['dialogConfig'])
-//         }
-//     }
-// });
-
-
-const Template = (args: DialogConfig) => ({
-    props: {
-        config: args
-    }
-});
-
-export const Basic: StoryFn<DialogConfig> = Template.bind({});
-Basic.args = {
-    title: 'Confirm Action',
-    message: 'Are you sure you want to proceed?',
-    confirmText: 'Confirm',
-    cancelText: 'Cancel'
+export const Basic: Story = {
+    args: {
+        title: 'Confirm Dialog',
+        message: 'Are you sure you want to proceed?',
+        confirmText: 'Confirm',
+        cancelText: 'Cancel',
+    },
 };

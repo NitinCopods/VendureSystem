@@ -43,7 +43,6 @@ export class ButtonComponent {
 
   // Function to build all the classes based on prop for component
   getUtilityClasses() {
-    console.log(this.label)
     const states = [
       capitalize(this.variant),
       `Size${capitalize(this.size)}`,

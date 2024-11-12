@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{ data.title }}</h2>
 <mat-dialog-content>
-  <p>{{ data.message }}</p>
+  <ng-template #dynamicComponentContainer></ng-template>
 </mat-dialog-content>
 <mat-dialog-actions>
   <lib-button label="Cancel" variant="text" (click)="onCancel()">

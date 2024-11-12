@@ -53,7 +53,8 @@ export class AppComponent {
       title: 'Confirm Action',
       message: 'Are you sure you want to proceed?',
       confirmText: 'Yes, proceed',
-      cancelText: 'No, go back'
+      cancelText: 'No, go back',
+      component: InputFieldComponent,
     }).subscribe(result => {
       if (result) {
         console.log('User confirmed the action');
